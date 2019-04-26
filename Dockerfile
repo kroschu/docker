@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y wget software-properties-common
 
 RUN add-apt-repository ppa:jonathonf/ffmpeg-4 -y
 RUN LC_CTYPE=en_US.UTF-8 add-apt-repository ppa:rmescandon/yq -y
-RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty multiverse" | sudo tee -a /etc/apt/sources.list
+RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty multiverse" | tee -a /etc/apt/sources.list
 RUN apt-get update && apt-get dist-upgrade -y
 
 # -- Setup tomcat7 to run under docker
