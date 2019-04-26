@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y wget apt-transport-https
 RUN echo "deb http://ubuntu.bigbluebutton.org/xenial-200 bigbluebutton-xenial main " | tee /etc/apt/sources.list.d/bigbluebutton.list
 RUN wget http://ubuntu.bigbluebutton.org/repo/bigbluebutton.asc -O- | apt-key add -
 
-RUN apt-get install -y language-pack-en
-RUN update-locale LANG=en_US.UTF-8
+# RUN apt-get install -y language-pack-en
+# RUN update-locale LANG=en_US.UTF-8
 
 RUN apt-get update && apt-get install -y wget software-properties-common
 
