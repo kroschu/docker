@@ -1,4 +1,10 @@
-FROM arm32v7/openjdk:8-jre-stretch
+FROM armv7/armhf-ubuntu:16.04
+
+# Install OpenJDK 8
+RUN apt-get update && \
+    apt-get install -y apt-utils curl openjdk-8-jdk && \
+    apt-get clean && \
+rm -rf /var/lib/apt/lists/*
 
 MAINTAINER ffdixon@bigbluebutton.org
 
@@ -9,14 +15,14 @@ RUN apt-get update && apt-get install -y wget apt-transport-https
 RUN echo "deb http://ubuntu.bigbluebutton.org/xenial-200 bigbluebutton-xenial main " | tee /etc/apt/sources.list.d/bigbluebutton.list
 RUN wget http://ubuntu.bigbluebutton.org/repo/bigbluebutton.asc -O- | apt-key add -
 
-# RUN apt-get install -y language-pack-en
-# RUN update-locale LANG=en_US.UTF-8
+RUN apt-get install -y language-pack-en
+RUN update-locale LANG=en_US.UTF-8
 
 RUN apt-get update && apt-get install -y wget software-properties-common
 
 RUN add-apt-repository ppa:jonathonf/ffmpeg-4 -y
 RUN LC_CTYPE=en_US.UTF-8 add-apt-repository ppa:rmescandon/yq -y
-RUN apt-get update 
+RUN apt-get update && apt-get dist upgrade
 
 # -- Setup tomcat7 to run under docker
 RUN apt-get install -y \
