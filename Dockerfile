@@ -1,4 +1,5 @@
-FROM ubuntu:16.04
+FROM arm32v7/openjdk:8-jre-stretch
+
 MAINTAINER ffdixon@bigbluebutton.org
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -25,7 +26,6 @@ RUN apt-get install -y \
   sudo       \
   tomcat7
 
-RUN sed -i 's|securerandom.source=file:/dev/random|securerandom.source=file:/dev/urandom|g'  /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
 ADD mod/tomcat7 /etc/init.d/tomcat7
 RUN chmod +x /etc/init.d/tomcat7
 
@@ -36,7 +36,7 @@ RUN apt-get install -y bbb-demo
 
 # -- Install mongodb (for HTML5 client)
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
-RUN echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+RUN echo "deb [ arch=armhf ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
 RUN sudo apt-get update && sudo apt-get install -y mongodb-org curl
 
 # -- Install nodejs (for HTML5 client)
